@@ -1,0 +1,20 @@
+Database: swiss_private_bank
+Question: What are all the catalog entry names?
+Generated SQL:
+None
+----------------------------------------
+Database: swiss_private_bank
+Question: Find the names of all the catalog entries.
+Generated SQL:
+None
+----------------------------------------
+Database: swiss_private_bank
+Question: What is the total wealth of all customers?
+Generated SQL:
+None
+----------------------------------------
+Database: swiss_private_bank
+Question: List all transactions above CHF 10,000.
+Generated SQL:
+None
+----------------------------------------
