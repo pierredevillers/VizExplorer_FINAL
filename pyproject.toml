@@ -1,0 +1,19 @@
+[project]
+name = "repl-nix-vizquerypal"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.11"
+dependencies = [
+    "chromadb>=0.5.17",
+    "matplotlib>=3.9.2",
+    "numpy>=2.1.2",
+    "openai>=1.53.0",
+    "pandas",
+    "plotly>=2.2.3",
+    "psycopg2-binary>=2.9.10",
+    "scipy>=1.14.1",
+    "seaborn",
+    "sqlalchemy>=0.13.2",
+    "statsmodels>=0.14.4",
+    "streamlit>=1.39.0",
+]

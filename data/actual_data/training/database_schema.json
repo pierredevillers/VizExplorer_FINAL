@@ -1,0 +1,226 @@
+{
+    "stocks_data": [
+        {
+            "column": "date",
+            "type": "date"
+        },
+        {
+            "column": "low",
+            "type": "numeric"
+        },
+        {
+            "column": "close",
+            "type": "numeric"
+        },
+        {
+            "column": "volume",
+            "type": "bigint"
+        },
+        {
+            "column": "open",
+            "type": "numeric"
+        },
+        {
+            "column": "ticker",
+            "type": "character varying"
+        },
+        {
+            "column": "high",
+            "type": "numeric"
+        }
+    ],
+    "holdings_data": [
+        {
+            "column": "quantity",
+            "type": "numeric"
+        },
+        {
+            "column": "holding_id",
+            "type": "character varying"
+        },
+        {
+            "column": "ticker",
+            "type": "character varying"
+        },
+        {
+            "column": "current_value",
+            "type": "numeric"
+        },
+        {
+            "column": "purchase_price",
+            "type": "numeric"
+        },
+        {
+            "column": "portfolio_id",
+            "type": "character varying"
+        }
+    ],
+    "etfs_historical": [
+        {
+            "column": "name",
+            "type": "character varying"
+        },
+        {
+            "column": "high",
+            "type": "numeric"
+        },
+        {
+            "column": "low",
+            "type": "numeric"
+        },
+        {
+            "column": "volume",
+            "type": "bigint"
+        },
+        {
+            "column": "date",
+            "type": "date"
+        },
+        {
+            "column": "close",
+            "type": "numeric"
+        },
+        {
+            "column": "open",
+            "type": "numeric"
+        },
+        {
+            "column": "ticker",
+            "type": "character varying"
+        }
+    ],
+    "training_data": [
+        {
+            "column": "question",
+            "type": "text"
+        },
+        {
+            "column": "sql_query",
+            "type": "text"
+        },
+        {
+            "column": "id",
+            "type": "integer"
+        }
+    ],
+    "clients_data": [
+        {
+            "column": "phone",
+            "type": "character varying"
+        },
+        {
+            "column": "date_of_birth",
+            "type": "date"
+        },
+        {
+            "column": "last_name",
+            "type": "character varying"
+        },
+        {
+            "column": "nationality",
+            "type": "character varying"
+        },
+        {
+            "column": "email",
+            "type": "character varying"
+        },
+        {
+            "column": "client_id",
+            "type": "integer"
+        },
+        {
+            "column": "first_name",
+            "type": "character varying"
+        },
+        {
+            "column": "address",
+            "type": "text"
+        }
+    ],
+    "transactions_data": [
+        {
+            "column": "client_id",
+            "type": "integer"
+        },
+        {
+            "column": "transaction_type",
+            "type": "character varying"
+        },
+        {
+            "column": "amount",
+            "type": "numeric"
+        },
+        {
+            "column": "currency",
+            "type": "character varying"
+        },
+        {
+            "column": "account_id",
+            "type": "character varying"
+        },
+        {
+            "column": "stock_ticker",
+            "type": "character varying"
+        },
+        {
+            "column": "transaction_date",
+            "type": "timestamp without time zone"
+        },
+        {
+            "column": "transaction_id",
+            "type": "character varying"
+        }
+    ],
+    "accounts_data": [
+        {
+            "column": "account_type",
+            "type": "character varying"
+        },
+        {
+            "column": "account_id",
+            "type": "character varying"
+        },
+        {
+            "column": "balance",
+            "type": "numeric"
+        },
+        {
+            "column": "currency",
+            "type": "character varying"
+        },
+        {
+            "column": "creation_date",
+            "type": "date"
+        },
+        {
+            "column": "client_id",
+            "type": "integer"
+        }
+    ],
+    "portfolios_data": [
+        {
+            "column": "creation_date",
+            "type": "date"
+        },
+        {
+            "column": "portfolio_id",
+            "type": "character varying"
+        },
+        {
+            "column": "total_value",
+            "type": "numeric"
+        },
+        {
+            "column": "portfolio_name",
+            "type": "character varying"
+        },
+        {
+            "column": "client_id",
+            "type": "integer"
+        },
+        {
+            "column": "currency",
+            "type": "character varying"
+        }
+    ]
+}

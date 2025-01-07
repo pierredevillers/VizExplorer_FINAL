@@ -1,0 +1,92 @@
+# Database Documentation for Private Bank Simulation
+
+## Overview
+This database simulates a private banking system, storing information about clients, accounts, transactions, portfolios, holdings, stocks, ETFs, and market news. It includes relationships to enable complex queries, such as tracking client transactions, portfolio performance, and market insights.
+
+## Tables and Descriptions
+
+### 1. clients_data
+Stores information about clients of the bank.
+- **client_id** (Primary Key): Unique identifier for each client.
+- **first_name**: First name of the client.
+- **last_name**: Last name of the client.
+- **email**: Unique email address.
+- **address**: Residential or mailing address.
+- **phone**: Contact number.
+- **nationality**: Nationality of the client.
+- **date_of_birth**: Date of birth of the client.
+
+### 2. accounts_data
+Tracks client accounts and their balances.
+- **account_id** (Primary Key): Unique identifier for each account.
+- **client_id** (Foreign Key): References `clients_data(client_id)`, linking accounts to clients.
+- **account_type**: Type of account (e.g., Savings, Checking).
+- **balance**: Current balance of the account.
+- **creation_date**: Date the account was created.
+- **currency**: Currency type (default: CHF).
+
+### 3. transactions_data
+Captures details of financial transactions.
+- **transaction_id** (Primary Key): Unique identifier for each transaction.
+- **client_id** (Foreign Key): References `clients_data(client_id)`.
+- **account_id** (Foreign Key): References `accounts_data(account_id)`.
+- **transaction_date**: Date and time of the transaction.
+- **transaction_type**: Type of transaction (e.g., Deposit, Withdrawal).
+- **amount**: Amount involved in the transaction.
+- **stock_ticker**: Stock ticker if the transaction involves stocks.
+- **currency**: Currency of the transaction.
+
+### 4. portfolios_data
+Manages client investment portfolios.
+- **portfolio_id** (Primary Key): Unique identifier for each portfolio.
+- **client_id** (Foreign Key): References `clients_data(client_id)`.
+- **portfolio_name**: Name of the portfolio.
+- **total_value**: Total value of the portfolio's assets.
+- **currency**: Currency of the portfolio.
+- **creation_date**: Date the portfolio was created.
+
+### 5. holdings_data
+Tracks individual holdings within portfolios.
+- **holding_id** (Primary Key): Unique identifier for each holding.
+- **portfolio_id** (Foreign Key): References `portfolios_data(portfolio_id)`.
+- **ticker**: Stock ticker symbol.
+- **quantity**: Number of shares/units held.
+- **purchase_price**: Price at which the asset was purchased.
+- **current_value**: Current market value of the holding.
+
+### 6. stocks_data
+Provides historical stock data for analysis.
+- **ticker** (Primary Key Part): Stock ticker symbol.
+- **date** (Primary Key Part): Date of the record.
+- **open**: Opening price of the stock.
+- **high**: Highest price during the day.
+- **low**: Lowest price during the day.
+- **close**: Closing price of the stock.
+- **volume**: Number of shares traded.
+
+### 7. etfs_historical
+Stores historical data for ETFs.
+- **ticker** (Primary Key Part): ETF ticker symbol.
+- **name**: Name of the ETF.
+- **date** (Primary Key Part): Date of the record.
+- **open**: Opening price of the ETF.
+- **high**: Highest price during the day.
+- **low**: Lowest price during the day.
+- **close**: Closing price of the ETF.
+- **volume**: Number of shares traded.
+
+### 8. market_news
+Stores market-related news articles.
+- **ticker**: Stock or ETF ticker symbol related to the news.
+- **headline**: News headline.
+- **source**: Source of the news (e.g., Bloomberg, Reuters).
+- **publish_date**: Date and time the news was published.
+- **url**: URL link to the article.
+- **language**: Language of the news article.
+
+## Relationships Between Tables
+- **clients_data ↔ accounts_data**: A client can have multiple accounts (`client_id`).
+- **clients_data ↔ transactions_data**: A client can perform multiple transactions (`client_id`).
+- **accounts_data ↔ transactions_data**: An account can have multiple transactions (`account_id`).
+- **clients_data ↔ portfolios_data**: A client can have multiple portfolios (`client_id`).
+- **portfolios_data ↔ holdings_data**: A portfolio can have multiple holdings (`portfolio_id`).
