@@ -60,7 +60,7 @@ VizExplorer is a **V-NLI application** that enables users to query financial dat
   - Files: `evaluation_log.log`, `training_log.log`
 
 - **Metrics**:
-  - Accuracy, SQL query success rate, and execution time.
+  - Accuracy, SQL query success rate, and similarity scores.
   - Visualized in `performance_measure/Perf_measures.png`.
 
 - **Performance Scripts**:
