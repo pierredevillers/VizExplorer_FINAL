@@ -1,6 +1,6 @@
 # **VizExplorer**
 
-A **Visual Natural Language Interface (V-NLI)** application designed for intuitive interaction with financial datasets using natural language queries. This project leverages advanced Text-to-SQL techniques, with performance metrics measured trained on the **BIRD** dataset included for evaluation.
+A **Visual Natural Language Interface (V-NLI)** application designed for intuitive interaction with financial datasets using natural language queries. This project leverages advanced Text-to-SQL techniques, with performance metrics measures trained on the **BIRD** dataset included for evaluation.
 
 ---
 
