@@ -16,7 +16,7 @@ A **Visual Natural Language Interface (V-NLI)** application designed for intuiti
 ## **Project Overview**
 
 VizExplorer is a **V-NLI application** that enables users to query financial datasets in plain language, automatically translating their input into SQL, executing the query, and visualizing results. The system is optimized for financial analysis tasks and supports database schema generation, and output visualizations.
-
+Link to the application: https://vizexplorer.streamlit.app/
 ---
 
 ## **Features**
