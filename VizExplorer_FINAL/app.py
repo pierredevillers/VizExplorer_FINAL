@@ -57,7 +57,8 @@ def get_database_connection():
     except Exception as e:
         st.error(f"Failed to connect to the database: {e}")
         return None
-
+    
+@st.cache_data(persist=True)
 def fetch_database_schema():
     
     query = """
