@@ -10,7 +10,6 @@ A **Visual Natural Language Interface (V-NLI)** application designed for intuiti
 2. [Features](#features)
 3. [Data and Models](#data-and-models)
 4. [Performance and Results](#performance-and-results)
-5. [Project Structure](#project-structure)
 
 ---
 
