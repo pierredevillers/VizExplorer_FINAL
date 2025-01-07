@@ -45,17 +45,17 @@ VizExplorer is a **V-NLI application** that enables users to query financial dat
 
 ### **Models**
 
-- **Output Directory**:
+- **Output**:
   - Location: `model_output/`
   - Includes:
-    - `bird_model_output_formatted.json`: Processed model outputs.
+    - `bird_model_output_formatted.json`: Returned and formatted outputs of the model.
     - `bird_model_output.json`: Raw model predictions.
 
 ---
 
 ## **Performance and Results**
 
-- **Evaluation Logs**:
+- **Logs**:
   - Location: `logs/`
   - Files: `evaluation_log.log`, `training_log.log`
 
@@ -65,28 +65,4 @@ VizExplorer is a **V-NLI application** that enables users to query financial dat
 
 - **Performance Scripts**:
   - Scripts in `performance_measure/` generate and log results.
-
 ---
-
-## **Project Structure**
-
-```
-VizExplorer_FINAL/
-├── README.md                   # Project overview and instructions
-├── LICENSE                     # Licensing information
-├── .streamlit/                 # Streamlit configuration files
-├── data/                       # Dataset-related files
-│   ├── BIRD_dataset/           # BIRD-specific data and scripts
-│   ├── Spider_dataset_TEST/    # Spider dataset for testing
-│   ├── actual_data/            # Real-world testing datasets
-│   └── ...
-├── logs/                       # Log files for performance tracking
-├── model_output/               # Model outputs (formatted and raw)
-├── model_training/             # Scripts for training models
-├── performance_measure/        # Performance evaluation scripts and results
-├── utils/                      # Utility scripts and configuration files
-│   ├── .env                    # Environment variables
-│   └── app.py                  # Streamlit app entry point
-├── requirements.txt            # Python dependencies
-```
-
