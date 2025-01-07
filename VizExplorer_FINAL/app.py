@@ -194,11 +194,9 @@ with st.expander("User Guide"):
     Below is the list of tables and their columns available for querying:
     """)
 
-    if schema:
-        schema_df = pd.DataFrame(schema, columns=["Table Name", "Column Name", "Data Type"])
-        st.dataframe(schema_df)
-    else:
-        st.write("Unable to retrieve the database schema at this time.")
+    schema_df = pd.DataFrame(schema, columns=["Table Name", "Column Name", "Data Type"])
+    st.dataframe(schema_df)
+    
 
 # Input Section
 user_query = st.text_input("Enter your query in natural language:", "")
