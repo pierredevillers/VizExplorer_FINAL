@@ -6,16 +6,8 @@ import numpy as np
 from vanna.remote import VannaDefault
 import vanna
 import re
-# from dotenv import load_dotenv
-
-# Load environment variables
-# load_dotenv()
-
-# Streamlit configuration for Replit compatibility
-os.environ["STREAMLIT_SERVER_ENABLE_WEBSOCKET_COMPRESSION"] = "false"
-os.environ["STREAMLIT_SERVER_ENABLE_CORS"] = "false"
-os.environ["STREAMLIT_SERVER_ADDRESS"] = "0.0.0.0"
-os.environ["STREAMLIT_SERVER_PORT"] = "8501"
+import psycopg2
+from psycopg2.extras import RealDictCursor
 
 # Streamlit configuration
 st.set_page_config(
@@ -46,6 +38,43 @@ if "query_active" not in st.session_state:
     st.session_state.query_active = False
 
 @st.cache_resource(ttl=3600)
+
+def get_database_connection():
+    dbname = "swiss_private_bank"
+    user = "swiss_private_bank_owner"
+    password = "p3g7qazZiGle"
+    host = "ep-snowy-tooth-a27ji8ct.eu-central-1.aws.neon.tech"
+    port = 5432
+    try:
+        conn = psycopg2.connect(
+            host=host,
+            dbname=dbname,
+            user=user,
+            password=password,
+            port=port
+        )
+        return conn
+    except Exception as e:
+        st.error(f"Failed to connect to the database: {e}")
+        return None
+
+def fetch_database_schema():
+    
+    query = """
+    SELECT table_name, column_name, data_type
+    FROM information_schema.columns
+    WHERE table_schema = 'public'
+    ORDER BY table_name, ordinal_position;
+    """
+    try:
+        conn = get_database_connection()
+        with conn.cursor() as cursor:
+            cursor.execute(query)
+            schema = cursor.fetchall()
+        return schema
+    except Exception as e:
+        st.error(f"Failed to fetch database schema: {e}")
+        return None
 
 def setup_vanna():
     api_key = 'be920fe18e6c4a3fa6bf9436d6113657'
@@ -124,7 +153,52 @@ def extract_table_names(sql_query):
 
 # Dashboard Widgets
 st.sidebar.subheader("Output Sample")
-total_rows = st.sidebar.number_input("Total Rows to Display", min_value=1, max_value=100, value=10)
+total_rows = st.sidebar.number_input("Maximum Rows to Display", min_value=1, max_value=100, value=10)
+
+schema = fetch_database_schema()
+
+with st.expander("User Guide"):
+    st.markdown("""
+    ### Welcome to the VizExplorer V-NLI Tool!
+    This application allows you to:
+    - Query the database in natural language.
+    - Retrieve dynamic results such as tables and visualizations.
+    - Explore financial data interactively.
+
+    ### How to Use:
+    1. Enter a question in the input box (e.g., "Show all accounts with a balance over 2,500 CHF").
+    2. Review the generated SQL query and results.
+    3. Export data or explore charts based on your query.
+
+    ### Supported Questions:
+    - **Simple Queries**: "List all clients."
+    - **Filtered Queries**: "Show transactions for account A123456."
+    - **Aggregated Queries**: "What is the total balance of all accounts?"
+
+    ### Examples of Questions Requiring JOINs:
+    - "Show all clients along with their account balances."
+    - "List transactions with the corresponding client names."
+    - "What are the portfolio holdings for each client?"
+
+    ### Data You Can Query:
+    - **Clients**: Names, emails, addresses, etc.
+    - **Accounts**: Types, balances, currencies.
+    - **Transactions**: Types, dates, amounts.
+    - **Portfolios**: Stock holdings, values, and performance.
+
+    ### Tips:
+    - Use natural language for your questions.
+    - Enable or disable SQL, table, or chart display using the sidebar settings.
+    - Check the "Query History" in the sidebar for past queries.
+    ### Available Data:
+    Below is the list of tables and their columns available for querying:
+    """)
+
+    if schema:
+        schema_df = pd.DataFrame(schema, columns=["Table Name", "Column Name", "Data Type"])
+        st.dataframe(schema_df)
+    else:
+        st.write("Unable to retrieve the database schema at this time.")
 
 # Input Section
 user_query = st.text_input("Enter your query in natural language:", "")
