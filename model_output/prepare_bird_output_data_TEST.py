@@ -1,8 +1,8 @@
 import json
 
 # File paths
-INPUT_FILE = "model_training_and_perf/bird_model_output.json"
-OUTPUT_FILE = "bird_model_output_formatted.json"
+INPUT_FILE = "VizExplorer_FINAL/model_training_and_perf/bird_model_output.json"
+OUTPUT_FILE = "VizExplorer_FINAL/model_training_and_perf/bird_model_output_formatted.json"
 
 def reformat_bird_output(input_file, output_file):
     """

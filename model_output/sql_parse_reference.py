@@ -109,8 +109,8 @@ def process_json_queries(json_file_path, bird_model_output_path, db_credentials)
 
 def main():
     # File paths
-    json_file_path = "converted_ground_truth.json"  
-    bird_model_output_path = "bird_model_output.json" 
+    json_file_path = "data/BIRD_dataset/raw_data/converted_ground_truth.json"  
+    bird_model_output_path = "model_output/bird_model_output.json" 
 
     # Database credentials
     db_credentials = {

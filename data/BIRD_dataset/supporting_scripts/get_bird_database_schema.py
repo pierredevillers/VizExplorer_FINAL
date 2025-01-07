@@ -81,10 +81,11 @@ def extract_all_ddls(user, password, host, port):
     return all_ddls
 
 # Usage
-user = "postgres"
-password = "123456789"
-host = "localhost"
-port = "5432"
+dbname = "swiss_private_bank"
+user = "swiss_private_bank_owner"
+password = "p3g7qazZiGle"
+host = "ep-snowy-tooth-a27ji8ct.eu-central-1.aws.neon.tech"
+port = 5432
 
 ddl_statements = extract_all_ddls(user, password, host, port)
 
