@@ -89,6 +89,6 @@ def compute_and_visualize_metrics(log_file_path):
     plt.tight_layout()
     plt.show()
 
-log_file_path = "VizExplorer_FINAL\model_training_and_perf\query_execution_comparison_log.json" 
+log_file_path = "performance_measure\query_execution_comparison_log.json" 
 
 compute_and_visualize_metrics(log_file_path)
