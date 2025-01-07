@@ -19,7 +19,7 @@ VizExplorer is a **V-NLI application** that enables users to query financial dat
 
 ---
 
-Link to the application: https://vizexplorer.streamlit.app/
+Link to the application: https://vizexplorer-tool.streamlit.app/
 
 ---
 
