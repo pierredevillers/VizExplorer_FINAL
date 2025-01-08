@@ -1,0 +1,55 @@
+{
+    "exact_match_accuracy": 0.0,
+    "average similarity score": 0.5811065016177992,
+    "average_bleu_score": 0.07237715000369813,
+    "execution_accuracy": 0.25355450236966826,
+    "average_processing_time_reference": 0.007877339093532245,
+    "average_processing_time_generated": 0.00505574582025161,
+    "valid_queries_reference": 418,
+    "non_valid_reference_queries_count": 3,
+    "valid_generated_queries": 222,
+    "invalid_generated_queries": 199,
+    "non_sql_responses_count": 110,
+    "generated_error_summary": [
+        [
+            "Query execution error: column q.driverid does not exist\nLINE 3: JOIN drivers d ON q.driverId = d.driverId\n                          ^\nHINT:  Perhaps you meant to reference the column \"q.driverId\".\n",
+            6
+        ],
+        [
+            "Query execution error: division by zero\n",
+            5
+        ],
+        [
+            "Query execution error: column t.gasstationid does not exist\nLINE 3: JOIN public.gasstations g ON t.GasStationID = g.GasStationID\n                                     ^\n",
+            5
+        ],
+        [
+            "Query execution error: syntax error at or near \"The\"\nLINE 1: The provided context IS insufficient TO generate the SQL que...\n        ^\n",
+            4
+        ],
+        [
+            "Query execution error: relation \"public.transactions_1k\" does not exist\nLINE 2: FROM public.transactions_1k t\n             ^\n",
+            3
+        ],
+        [
+            "Query execution error: column p.owneruserid does not exist\nLINE 3: JOIN public.users u ON p.OwnerUserId = u.Id\n                               ^\nHINT:  Perhaps you meant to reference the column \"p.OwnerUserId\".\n",
+            3
+        ],
+        [
+            "Query execution error: column d.a2 does not exist\nLINE 2:        d.A2 AS district_name,\n               ^\nHINT:  Perhaps you meant to reference the column \"d.A2\".\n",
+            2
+        ],
+        [
+            "Query execution error: column r.raceid does not exist\nLINE 4: WHERE r.raceId = 901;\n              ^\nHINT:  Perhaps you meant to reference the column \"r.raceId\".\n",
+            2
+        ],
+        [
+            "Query execution error: column r.driverid does not exist\nLINE 5: JOIN public.drivers d ON r.driverId = d.driverId\n                                 ^\nHINT:  Perhaps you meant to reference the column \"r.driverId\".\n",
+            2
+        ],
+        [
+            "Query execution error: column p.id does not exist\nLINE 3: JOIN public.\"Laboratory\" l ON p.ID = l.ID\n                                      ^\n",
+            2
+        ]
+    ]
+}

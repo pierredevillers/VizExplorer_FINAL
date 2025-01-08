@@ -75,15 +75,6 @@ Stores historical data for ETFs.
 - **close**: Closing price of the ETF.
 - **volume**: Number of shares traded.
 
-### 8. market_news
-Stores market-related news articles.
-- **ticker**: Stock or ETF ticker symbol related to the news.
-- **headline**: News headline.
-- **source**: Source of the news (e.g., Bloomberg, Reuters).
-- **publish_date**: Date and time the news was published.
-- **url**: URL link to the article.
-- **language**: Language of the news article.
-
 ## Relationships Between Tables
 - **clients_data ↔ accounts_data**: A client can have multiple accounts (`client_id`).
 - **clients_data ↔ transactions_data**: A client can perform multiple transactions (`client_id`).
