@@ -69,17 +69,9 @@
 ### Visualizations
 
 Include visualizations (charts) for:
-1. Distribution of BLEU Scores
-2. Execution Accuracy Breakdown
-3. Processing Time Comparison
-4. Similarity Score Distribution
-5. Most Common Errors
-
-Embed or reference your saved charts as `.png` files. For example:
+1. ![Distribution of BLEU Scores](performance_measure\graphical_charts\BLEU_score_distribution.png)
+2. ![Processing Time Comparison](performance_measure\graphical_charts\Processing_time_comparison.png)
+3. ![Queries Validation Breakdown](performance_measure\graphical_charts\Queries_validation_breakdown.png)
+4. ![Similarity Score Distribution](performance_measure\graphical_charts\Similarity_score_distribution.png)
 
 ```markdown
-#### Execution Accuracy Breakdown
-![Execution Accuracy Breakdown](performance_measure/execution_accuracy_breakdown.png)
-
-#### Similarity Score Distribution
-![Similarity Score Distribution](performance_measure/similarity_score_distribution.png)
