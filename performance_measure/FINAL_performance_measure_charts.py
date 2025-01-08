@@ -60,7 +60,7 @@ def plot_processing_time_comparison(ref_stats, gen_stats):
         barmode='group',
         template="plotly_white"
     )
-    fig.show()
+    fig.show()   
 
 
 def plot_queries_validation_breakdown(valid_generated, invalid_generated, non_sql):
@@ -79,5 +79,5 @@ def plot_queries_validation_breakdown(valid_generated, invalid_generated, non_sq
         title="Queries Validity Breakdown",
         template="plotly_white"
     )
-    fig.show()
+    fig.show()   
 
