@@ -68,6 +68,9 @@
 
 ## Visualizations
 
+### Similarity Score Distribution
+![Similarity Score Distribution](graphical_charts/Similarity_score_distribution.png)
+
 ### BLEU Score Distribution
 ![BLEU Score Distribution](graphical_charts/BLEU_score_distribution.png)
 
@@ -76,8 +79,5 @@
 
 ### Queries Validation Breakdown
 ![Queries Validation Breakdown](graphical_charts/Queries_validation_breakdown.png)
-
-### Similarity Score Distribution
-![Similarity Score Distribution](graphical_charts/Similarity_score_distribution.png)
 
 ```markdown
