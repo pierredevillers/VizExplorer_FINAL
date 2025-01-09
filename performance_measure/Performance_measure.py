@@ -1,11 +1,12 @@
 import json
 import psycopg2
 import time
+import numpy as np
 import pandas as pd
 from collections import Counter
 from difflib import SequenceMatcher
 from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
-from FINAL_performance_measure_charts import (
+from Performance_measure_charts import (
     plot_similarity_distribution,
     plot_bleu_distribution,
     plot_processing_time_comparison,
@@ -48,10 +49,36 @@ def is_valid_sql(query):
     sql_keywords = {"SELECT", "FROM", "WHERE", "JOIN", "GROUP", "ORDER", "INSERT", "UPDATE", "DELETE"}
     return any(keyword in query.upper() for keyword in sql_keywords)
 
+def calculate_tau(conn, sql, runs=100):
+    times = []
+    for _ in range(runs):
+        start_time = time.time()
+        try:
+            execute_query(conn, sql)
+            times.append(time.time() - start_time)
+        except Exception:
+            times.append(float('inf'))  # Timeout or error adds a large value
+
+    # Remove outliers using the interquartile range (IQR) method
+    times = np.array(times)
+    finite_times = times[np.isfinite(times)]  # Exclude infinite values
+    if len(finite_times) == 0:
+        return float('inf')  # No valid runs
+    q1 = np.percentile(finite_times, 25)  # 25th percentile
+    q3 = np.percentile(finite_times, 75)  # 75th percentile
+    iqr = q3 - q1
+    lower_bound = q1 - 1.5 * iqr
+    upper_bound = q3 + 1.5 * iqr
+    filtered_times = finite_times[(finite_times >= lower_bound) & (finite_times <= upper_bound)]
+
+    # Return the average of filtered times
+    return np.mean(filtered_times) if len(filtered_times) > 0 else float('inf')
+
 # Initialize metrics and logs
 exact_match_count = 0
 bleu_scores = []
 execution_accuracy_count = 0
+r_ves_scores = []
 processing_times = {"reference": [], "generated": []}
 valid_queries_reference = 0
 valid_generated_queries_count = 0
@@ -81,22 +108,31 @@ for query in queries:
         # Connect to the database
         conn = connect_to_db(db_id)
         if conn:
-            # Execute reference query
+            # Measure processing time and execute queries
+            start_time = time.time()
             ref_result = execute_query(conn, ref_normalized)
+            ref_time = time.time() - start_time
+            ref_tau = calculate_tau(conn, ref_normalized)
+
             if isinstance(ref_result, str):  # If error occurred
                 reference_query_errors.append(ref_result)
                 non_valid_reference_queries_count += 1
+                ref_time = 0
             elif isinstance(ref_result, list):
                 if ref_result:  # Valid and non-empty result
                     valid_queries_reference += 1
                 else:  # Empty result
                     non_valid_reference_queries_count += 1
 
-            # Execute generated query
+            start_time = time.time()
             gen_result = execute_query(conn, gen_normalized)
+            gen_time = time.time() - start_time
+            gen_tau = calculate_tau(conn, gen_normalized)
+
             if isinstance(gen_result, str):  # If error occurred
                 generated_query_errors.append(gen_result)
                 invalid_generated_queries_count += 1
+                gen_time = 0
             elif isinstance(gen_result, list):
                 if gen_result:  # Valid and non-empty result
                     valid_generated_queries_count += 1
@@ -104,18 +140,35 @@ for query in queries:
                     invalid_generated_queries_count += 1
 
             # Execution Accuracy
-            if isinstance(ref_result, list) and isinstance(gen_result, list) and set(ref_result) == set(gen_result):
+            is_correct = isinstance(ref_result, list) and isinstance(gen_result, list) and set(ref_result) == set(gen_result)
+            if is_correct:
                 execution_accuracy_count += 1
 
-            # Measure processing time
-            start_time = time.time()
-            execute_query(conn, ref_normalized)
-            processing_times["reference"].append(time.time() - start_time)
+            # Append processing times
+            processing_times["reference"].append(ref_time)
+            processing_times["generated"].append(gen_time)
 
-            start_time = time.time()
-            execute_query(conn, gen_normalized)
-            processing_times["generated"].append(time.time() - start_time)
+            # R-VES Score Calculation
+            if gen_tau > 0:
+                tau = ref_tau / gen_tau
+            else:
+                tau = float('inf')
 
+             # R-VES Score Calculation
+            if is_correct:
+                if tau >= 2:
+                    r_ves = 1.25
+                elif 1 <= tau < 2:
+                    r_ves = 1.0
+                elif 0.5 <= tau < 1:
+                    r_ves = 0.75
+                elif 0.25 <= tau < 0.5:
+                    r_ves = 0.5
+                else:  # tau < 0.25
+                    r_ves = 0.25
+            else:
+                r_ves = 0.0  # Incorrect query
+            r_ves_scores.append(r_ves)
             conn.close()
     except Exception as e:
         print(f"Error processing queries for db_id={db_id}: {e}")
@@ -170,6 +223,7 @@ processing_time_gen_stats = {
     "min": round(min(processing_times["generated"]), 2) if processing_times["generated"] else 0,
     "max": round(max(processing_times["generated"]), 2) if processing_times["generated"] else 0,
 }
+average_r_ves = sum(r_ves_scores) / len(r_ves_scores) if r_ves_scores else 0
 
 # Display results as DataFrame
 df = pd.DataFrame({
@@ -197,6 +251,7 @@ print(f"Non-SQL Responses (Out of Scope): {non_sql_responses_count} ({(non_sql_r
 print(f"Exact Match Accuracy: {exact_match_accuracy:.2%}")
 print(f"Execution Accuracy: {execution_accuracy:.2%}")
 
+print(f"Average R-VES Score: {average_r_ves:.2f}")
 # Display performance metrics in console
 print("\nSummary of BLEU Scores and Processing Times:")
 print(df)
@@ -208,9 +263,10 @@ for error, count in generated_error_summary.most_common(5):
 # Save results to a JSON file
 output_results = {
     "exact_match_accuracy": exact_match_accuracy,
-    "average similarity score": average_similarity_score,
+    "average_similarity_score": average_similarity_score,
     "average_bleu_score": average_bleu_score,
     "execution_accuracy": execution_accuracy,
+    "average_r-ves_score": average_r_ves,
     "average_processing_time_reference": average_processing_time_ref,
     "average_processing_time_generated": average_processing_time_gen,
     "valid_queries_reference": valid_queries_reference,

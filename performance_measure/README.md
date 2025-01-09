@@ -12,7 +12,7 @@
 
 - **Exact Match Accuracy**: 0.00%
 - **Execution Accuracy**: 25.36%
-
+- **Average R-VES Score"**: 0.24
 ---
 
 ### BLEU Scores and Processing Times
