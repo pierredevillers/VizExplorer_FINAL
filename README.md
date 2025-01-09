@@ -124,15 +124,9 @@ For more details on the BIRD dataset and benchmarked techniques, visit [BIRD Ben
   - **Reference Query**: Average 0.01s (Max: 0.2s, Min: 0.0s)
   - **Generated Query**: Average 0.01s (Max: 0.14s, Min: 0.0s)
 
-- **Most Common Errors**:
-  1. `column q.driverid does not exist`: 6 occurrences
-  2. `division by zero`: 5 occurrences
-  3. `column t.gasstationid does not exist`: 5 occurrences
-  4. `syntax error at or near "The"`: 4 occurrences
-  5. `relation "public.transactions_1k" does not exist`: 3 occurrences
-
 ---
-## Data and Models
+## **Data and Models**
+
 
 - **Clients Table**:
   - Contains client details such as name, nationality, email, and date of birth.
@@ -168,6 +162,8 @@ For more details on the BIRD dataset and benchmarked techniques, visit [BIRD Ben
   - Historical price data for ETFs such as SPDR S&P 500 (SPY) and Vanguard Total Stock Market ETF (VTI).
   - **Source**: The data is fetched using the **Financial Modeling Prep API**.
   - Script: [`etf_data.py`](etf_data.py)
+
+![Relational Database Schema](data\actual_data\database_schema.png)
 
 ## **Logs and Visualizations**
 - **Logs**:
