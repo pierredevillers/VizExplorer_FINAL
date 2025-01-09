@@ -78,16 +78,6 @@ ddl_statements = [
     );
     """,
     """
-    CREATE TABLE market_news (
-    ticker VARCHAR(10),
-    headline TEXT,
-    source VARCHAR(100),
-    publish_date TIMESTAMP,
-    url TEXT,
-    language VARCHAR(2)
-    );
-    """,
-    """
     CREATE TABLE portfolios_data (
     portfolio_id VARCHAR(10) NOT NULL,
     client_id INT NOT NULL,

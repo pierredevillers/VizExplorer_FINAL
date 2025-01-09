@@ -13,7 +13,7 @@ api_key = 'be920fe18e6c4a3fa6bf9436d6113657'
 vanna_model_name = 'vizexplorer'
 vn = VannaDefault(model=vanna_model_name, api_key=api_key)
 
-# Connect Vanna to PostgreSQL
+# Connect model to PostgreSQL
 try:
     vn.connect_to_postgres(
         host = host,
@@ -22,20 +22,12 @@ try:
         password = password,
         port = port
     )
-    print("Vanna successfully connected to PostgreSQL.")
+    print("Model successfully connected to PostgreSQL.")
 except Exception as e:
-    print(f"Failed to connect Vanna to PostgreSQL: {e}")
+    print(f"Failed to connect Model to PostgreSQL: {e}")
 
 def format_output(data):
-    """
-    Formats the output data into a readable format.
 
-    Args:
-        data (list): List of dictionaries containing question, query, and other fields.
-
-    Returns:
-        str: Formatted string with readable output.
-    """
     formatted = []
     for entry in data:
         question = entry.get("question", "No question provided")
@@ -44,15 +36,9 @@ def format_output(data):
         formatted.append(f"Database: {db_id}\nQuestion: {question}\nGenerated SQL:\n{query}\n{'-' * 40}")
     return "\n".join(formatted)
 
-def test_vanna_model(vanna, test_questions):
-    """
-    Test the Vanna model with a list of sample questions and format the results.
+def test_model(vanna, test_questions):
 
-    Args:
-        vanna: Vanna model instance.
-        test_questions (list): List of natural language questions.
-    """
-    print("\nStarting Vanna Model Testing...\n")
+    print("\nStarting Model Testing...\n")
     results = []  # Store results for formatting
     for question in test_questions:
         try:
@@ -61,7 +47,7 @@ def test_vanna_model(vanna, test_questions):
             results.append({
                 "question": question,
                 "query": generated_sql,
-                "db_id": "swiss_private_bank"  # Adjust to your database ID
+                "db_id": "swiss_private_bank" 
             })
             print(f"✔ Successfully generated SQL for: {question}")
         except Exception as e:
@@ -82,5 +68,4 @@ if __name__ == "__main__":
         "List all transactions above CHF 2,500."
     ]
 
-    # Test the model and format the output
-    test_vanna_model(vn, test_questions)
+    test_model(vn, test_questions)

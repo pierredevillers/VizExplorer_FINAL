@@ -4,27 +4,14 @@ import json
 
 
 def normalize_sql(query):
-    """
-    Normalize SQL query with standardized indentation and keyword casing.
-    """
+
     formatted_query = sqlparse.format(query, reindent=True, keyword_case='upper')
     compact_query = sqlparse.format(formatted_query, strip_whitespace=True)
     return compact_query
 
 
 def execute_query(query, db_id, db_credentials):
-    """
-    Execute an SQL query against a PostgreSQL database.
 
-    Args:
-        query (str): The SQL query to execute.
-        db_id (str): The database name.
-        db_credentials (dict): PostgreSQL connection credentials.
-
-    Returns:
-        list: Query result if successful.
-        str: Error message if the query fails.
-    """
     try:
         conn = psycopg2.connect(
             dbname=db_id,
@@ -44,30 +31,14 @@ def execute_query(query, db_id, db_credentials):
 
 
 def get_valid_questions(bird_model_output_path):
-    """
-    Load valid questions from bird_model_output.json.
 
-    Args:
-        bird_model_output_path (str): Path to the bird_model_output.json file.
-
-    Returns:
-        set: A set of valid questions.
-    """
     with open(bird_model_output_path, 'r', encoding='utf-8') as file:
         bird_model_data = json.load(file)
     return {item["question"] for item in bird_model_data if "question" in item}
 
 
 def process_json_queries(json_file_path, bird_model_output_path, db_credentials):
-    """
-    Process SQL queries in a JSON file, executing only the ones where the
-    question matches the bird_model_output.json file.
 
-    Args:
-        json_file_path (str): Path to the JSON file containing SQL queries.
-        bird_model_output_path (str): Path to the bird_model_output.json file.
-        db_credentials (dict): PostgreSQL connection credentials.
-    """
     # Load valid questions
     valid_questions = get_valid_questions(bird_model_output_path)
     print(f"Valid questions loaded: {len(valid_questions)}")
@@ -117,7 +88,7 @@ def main():
         "user": "postgres",
         "password": "123456789",
         "host": "localhost",
-        "port": "5432"  # Default PostgreSQL port
+        "port": "5432"  
     }
 
     # Process queries

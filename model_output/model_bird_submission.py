@@ -36,16 +36,7 @@ def setup_vanna():
         raise
 
 def generate_single_sql_query(vn, prompt):
-    """
-    Generate a single SQL query for a given prompt using the Vanna model.
-£
-    Args:
-        vn (VannaDefault): Initialized Vanna model instance.
-        prompt (dict): A single natural language question with db_id.
 
-    Returns:
-        dict or None: The formatted output containing the question, SQL query, and db_id.
-    """
     try:
         response = vn.generate_sql(question=prompt["question"], allow_llm_to_see_data=True)
         logging.info(f"Raw response for prompt '{prompt['question']}': {response}")
@@ -68,9 +59,7 @@ def generate_single_sql_query(vn, prompt):
         return None
 
 def main():
-    """
-    Main function to generate SQL for multiple prompts while limiting queries per database.
-    """
+
     try:
         # Initialize model
         vn = setup_vanna()

@@ -20,27 +20,21 @@ postgres_connection_details = {
 }
 
 def prompt_user_confirmation():
-    """
-    Prompt the user to confirm whether to proceed with training.
-    """
+
     while True:
-        user_input = input("Do you want to proceed with training the Vanna model? (Y/N): ").strip().upper()
+        user_input = input("Do you want to proceed with training the model? (Y/N): ").strip().upper()
         if user_input in ["Y", "N"]:
             return user_input == "Y"
         print("Invalid input. Please enter 'Y' or 'N'.")
 
 def connect_to_postgres(db_name):
-    """
-    Connect to a specific PostgreSQL database.
-    """
+
     connection_details = postgres_connection_details.copy()
     connection_details['dbname'] = db_name
     return psycopg2.connect(**connection_details)
 
 def get_all_databases():
-    """
-    Retrieve all databases excluding specific ones.
-    """
+
     conn = connect_to_postgres('postgres')
     try:
         with conn.cursor() as cursor:
@@ -58,9 +52,7 @@ def get_all_databases():
         conn.close()
 
 def extract_ddl_statements(db_name):
-    """
-    Extract DDL statements for all tables in a PostgreSQL database.
-    """
+
     conn = connect_to_postgres(db_name)
     ddl_statements = []
     try:
@@ -87,9 +79,7 @@ def extract_ddl_statements(db_name):
     return ddl_statements
 
 def normalize_ddl(ddl):
-    """
-    Normalize DDL to ensure consistency in training data.
-    """
+
     ddl = ddl.replace('character varying', 'VARCHAR')
     ddl = ddl.replace('integer', 'INT')
     ddl = ddl.replace('real', 'REAL')
@@ -98,9 +88,7 @@ def normalize_ddl(ddl):
     return ddl
 
 def validate_all_databases(databases):
-    """
-    Validate all DDL statements for all databases and display them for user review.
-    """
+
     all_valid = True
     for db_name in databases:
         print(f"\n--- Validating DDL Statements for Database: {db_name} ---")
@@ -116,9 +104,7 @@ def validate_all_databases(databases):
     return all_valid
 
 def train_vanna_on_ddl(vn, databases):
-    """
-    Train Vanna.AI on the DDL statements of a PostgreSQL database.
-    """
+
     for db_name in databases:
         ddl_statements = extract_ddl_statements(db_name)
         for table_name, ddl in ddl_statements:
@@ -132,9 +118,7 @@ def train_vanna_on_ddl(vn, databases):
                 logging.error(f"Failed to train Vanna on table '{table_name}': {e}")
 
 def main():
-    """
-    Main function to verify DDL and train the Vanna model.
-    """
+
     # Step 1: Get all databases to process
     databases = get_all_databases()
 
@@ -147,7 +131,7 @@ def main():
 
     # Step 3: Ask for User Confirmation
     if prompt_user_confirmation():
-        # Step 4: Initialize Vanna model
+        # Step 4: Initialize model
         vn = VannaDefault(model="bird_explorer", api_key="be920fe18e6c4a3fa6bf9436d6113657")
 
         # Step 5: Train Vanna.AI on DDL Statements
