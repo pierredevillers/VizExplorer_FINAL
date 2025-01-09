@@ -115,8 +115,9 @@ For more details on the BIRD dataset and benchmarked techniques, visit [BIRD Ben
 - **Metrics**:
   - **Exact Match Accuracy**: 0.00%
   - **Execution Accuracy**: 25.36% 
-  - **Average BLEU Score**: 0.07
   - **Average Similarity Score**: 0.58
+  - **Average BLEU Score**: 0.07
+  - **Average Jaccard Similarity Score**: 0.41
 
 - **Processing Times**:
   - **Reference Query**: Average 0.01s (Max: 0.2s, Min: 0.0s)
