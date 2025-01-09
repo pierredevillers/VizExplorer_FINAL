@@ -163,7 +163,7 @@ For more details on the BIRD dataset and benchmarked techniques, visit [BIRD Ben
   - **Source**: The data is fetched using the **Financial Modeling Prep API**.
   - Script: [`etf_data.py`](etf_data.py)
 
-![Relational Database Schema](data\actual_data\database_schema.png)
+![Relational Database Schema](data/actual_data/database_schema.png)
 
 ## **Logs and Visualizations**
 - **Logs**:
