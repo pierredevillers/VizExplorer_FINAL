@@ -114,7 +114,7 @@ For more details on the BIRD dataset and benchmarked techniques, visit [BIRD Ben
 
 - **Metrics**:
   - **Exact Match Accuracy**: 0.00%
-  - **Execution Accuracy**: 25.36% (8)
+  - **Execution Accuracy**: 25.36% 
   - **Average BLEU Score**: 0.07
   - **Average Similarity Score**: 0.58
 
