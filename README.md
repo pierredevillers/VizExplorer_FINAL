@@ -8,6 +8,9 @@ A **Visual Natural Language Interface (V-NLI)** application designed for intuiti
 
 1. [Project Overview](#project-overview)
 2. [Features](#features)
+3. [Folder Structure](#folder-structure)
+4. [BIRD Benchmark Results](#bird-benchmark-results)
+5. [Additiona Measures](#additional-measures)
 3. [Data and Models](#data-and-models)
 4. [Performance and Results](#performance-and-results)
 
@@ -30,33 +33,109 @@ Link to the application: https://vizexplorer-tool.streamlit.app/
 - **Performance Metrics**: Logs and evaluates model outputs trained on the **BIRD** dataset with accuracy.
 - **Database Management**: Prepares, validates, and executes queries on PostgreSQL and SQLite.
 
-## **Data and Models**
+### Folder Structure
 
-### **Data**
+- **`data/`**:
+  - Contains datasets for training, testing, and real-world financial data:
+    - `BIRD_dataset/`: Training and evaluation data for the Text-to-SQL task.
+    - `Spider_dataset_TEST/`: Tentative of training data with Spider for the Text-to-SQL task.
+    - `actual_data/`: Real-world datasets for testing the application.
 
-- **BIRD Dataset**:
-  - Location: `data/BIRD_dataset/`
-  - Contains database schemas, queries, and evaluation data.
+- **`performance_measure/`**:
+  - Contains scripts and charts for evaluating the model's performance:
+    - Scripts for metrics like BLEU score, execution accuracy, and R-VES.
+    - Visualized charts stored in `performance_measure/graphical_charts/`.
 
-- **Spider Dataset (TEST)**:
-  - Location: `data/Spider_dataset_TEST/`
-  - Used for additional validation and testing.
+- **`logs/`**:
+  - Logs for training and evaluation processes:
+    - `evaluation_log.log`: Evaluation details.
+    - `training_log.log`: Training progress.
 
-- **Actual Data**:
-  - Location: `data/actual_data/`
-  - Real-world datasets for testing.
-
-### **Models**
-
-- **Output**:
-  - Location: `model_output/`
-  - Includes:
-    - `bird_model_output_formatted.json`: Returned and formatted outputs of the model.
+- **`model_output/`**:
+  - Stores model predictions:
+    - `bird_model_output_formatted.json`: Cleaned and formatted outputs.
     - `bird_model_output.json`: Raw model predictions.
 
 ---
+### BIRD Benchmark Results
 
-## **Performance and Results**
+**Model Results on BIRD Benchmark:**
+- **Exact Match Accuracy**: 0.00%
+- **Execution Accuracy**: 25.36%
+- **Average R-VES Score**: 0.85
+
+**Comparison with Other Benchmarked Techniques**:
+
+**Execution Accuracy (EX) on PostgreSQL (Mini Dev Set):**
+
+| Rank | Model                  | Code | PostgreSQL |
+|------|------------------------|------|------------|
+| 1    | TA + GPT-4 (HKU)       | [link](https://github.com/quge2023/TA-SQL) | 50.80      |
+| 2    | GPT-4                  | UNK  | 35.80      |
+| 3    | GPT-4-32k              | UNK  | 35.00      |
+| 4    | GPT-4-turbo            | UNK  | 36.00      |
+| 5    | Llama3-70b-instruct    | UNK  | 29.40      |
+| 6    | GPT-35-turbo           | UNK  | 27.40      |
+| **7** | **VizExplorer** | -    | **25.36**  |
+| 8    | GPT-35-turbo-instruct  | UNK  | 26.60      |
+| 9    | Phi-3-medium-128k-instruct | UNK  | 21.60      |
+| 10    | Llama3-8b-instruct     | UNK  | 18.40      |
+| 11   | Mixtral-8x7b           | UNK  | 12.40      |
+
+
+For more details on the BIRD dataset and benchmarked techniques, visit [BIRD Bench](https://bird-bench.github.io/).
+
+---
+
+## **Additional measures**
+
+### **Quick Overview of Results**
+- **Total Queries**: 532
+- **Valid Queries**: 422
+  - **Valid Reference Queries**: 418 (99.05% of 422 valid queries)
+  - **Non-Valid Reference Queries**: 3 (0.71% of 422 valid queries)
+  - **Valid Generated Queries**: 222 (52.61% of 422 valid queries)
+  - **Non-Valid Generated Queries**: 199 (47.16% of 422 valid queries)
+  - **Non-SQL Responses (Out of Scope)**: 110 (20.68% of 532 total queries)
+
+- **Metrics**:
+  - **Exact Match Accuracy**: 0.00%
+  - **Execution Accuracy**: 25.36% (8)
+  - **Average BLEU Score**: 0.07
+  - **Average Similarity Score**: 0.58
+  - **Average R-VES Score**: 0.85
+
+- **Processing Times**:
+  - **Reference Query**: Average 0.01s (Max: 0.2s, Min: 0.0s)
+  - **Generated Query**: Average 0.01s (Max: 0.14s, Min: 0.0s)
+
+- **Most Common Errors**:
+  1. `column q.driverid does not exist`: 6 occurrences
+  2. `division by zero`: 5 occurrences
+  3. `column t.gasstationid does not exist`: 5 occurrences
+  4. `syntax error at or near "The"`: 4 occurrences
+  5. `relation "public.transactions_1k" does not exist`: 3 occurrences
+
+---
+
+### **Logs and Visualizations**
+- **Logs**:
+  - Location: `logs/`
+  - Files: `evaluation_log.log`, `training_log.log`
+
+- **Visualizations**:
+  - BLEU Score Distribution
+  - Execution Accuracy Breakdown
+  - Processing Time Comparison
+  - Similarity Score Distribution
+  - Query Validation Breakdown
+  - Visualized charts saved in `performance_measure/graphical_charts/`.
+
+- **Scripts**:
+  - Location: `performance_measure/`
+  - Scripts for performance metrics calculation and visualizations.
+
+---
 
 - **Logs**:
   - Location: `logs/`
