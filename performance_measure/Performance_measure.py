@@ -300,7 +300,7 @@ print(f"Execution Accuracy: {execution_accuracy:.2%}")
 
 print(f"Average R-VES Score: {average_r_ves:.2f}")
 
-print("\nSummary of BLEU Scores and Processing Times:")
+print("\nSummary of Similarity Scores and Processing Times:")
 print(df)
 
 print("\nMost Common Errors in Generated Queries:")
