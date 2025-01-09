@@ -64,7 +64,7 @@ Link to the application: https://vizexplorer-tool.streamlit.app/
 
 - **Metrics**:
   - Accuracy, SQL query success rate, and similarity scores.
-  - Visualized in `performance_measure/Perf_measures.png`.
+  - Visualized in `performance_measure/graphical_charts`.
 
 - **Performance Scripts**:
   - Scripts in `performance_measure/` generate and log results.
