@@ -15,6 +15,21 @@ def plot_similarity_distribution(similarity_scores):
     )
     fig.show()
 
+def plot_jaccard_similarity_distribution(jaccard_scores):
+    """Plot the distribution of Jaccard Similarity scores."""
+    fig = px.histogram(
+        x=jaccard_scores,
+        nbins=10,
+        title="Jaccard Similarity Distribution",
+        labels={"x": "Jaccard Similarity"},
+        template="plotly_white"
+    )
+    fig.update_layout(
+        xaxis_title="Jaccard Similarity",
+        yaxis_title="Frequency",
+        bargap=0.2
+    )
+    fig.show()
 
 def plot_bleu_distribution(bleu_scores):
     fig = px.histogram(

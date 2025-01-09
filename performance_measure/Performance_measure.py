@@ -10,7 +10,8 @@ from Performance_measure_charts import (
     plot_similarity_distribution,
     plot_bleu_distribution,
     plot_processing_time_comparison,
-    plot_queries_validation_breakdown)
+    plot_queries_validation_breakdown,
+    plot_jaccard_similarity_distribution)
 
 # Database credentials
 db_credentials = {
@@ -49,6 +50,13 @@ def is_valid_sql(query):
     sql_keywords = {"SELECT", "FROM", "WHERE", "JOIN", "GROUP", "ORDER", "INSERT", "UPDATE", "DELETE"}
     return any(keyword in query.upper() for keyword in sql_keywords)
 
+# Function to calculate Jaccard Similarity
+def jaccard_similarity(set1, set2):
+    intersection = len(set1.intersection(set2))
+    union = len(set1.union(set2))
+    return intersection / union if union > 0 else 0
+
+# Function to calculate Tau, for the R-VES score
 def calculate_tau(conn, sql, runs=100):
     times = []
     for _ in range(runs):
@@ -88,6 +96,7 @@ non_sql_responses_count = 0
 reference_query_errors = []
 generated_query_errors = []
 similarity_scores = []
+jaccard_scores = []
 
 # Evaluate each query
 for query in queries:
@@ -143,6 +152,13 @@ for query in queries:
             is_correct = isinstance(ref_result, list) and isinstance(gen_result, list) and set(ref_result) == set(gen_result)
             if is_correct:
                 execution_accuracy_count += 1
+
+            # Calculate Jaccard Similarity
+            if isinstance(ref_result, list) and isinstance(gen_result, list):
+                ref_set = set(ref_result)
+                gen_set = set(gen_result)
+                jaccard_score = jaccard_similarity(ref_set, gen_set)
+                jaccard_scores.append(jaccard_score)
 
             # Append processing times
             processing_times["reference"].append(ref_time)
@@ -209,6 +225,13 @@ bleu_stats = {
 
 execution_accuracy = execution_accuracy_count / valid_queries_total if valid_queries_total else 0
 
+average_jaccard = sum(jaccard_scores) / len(jaccard_scores) if jaccard_scores else 0
+jaccard_stats = {
+    "average": round(average_jaccard, 2),
+    "min": round(min(jaccard_scores), 2) if jaccard_scores else 0,
+    "max": round(max(jaccard_scores), 2) if jaccard_scores else 0,
+}
+
 average_processing_time_ref = sum(processing_times["reference"]) / len(processing_times["reference"]) if processing_times["reference"] else 0
 processing_time_ref_stats = {
     "average": round(sum(processing_times["reference"]) / len(processing_times["reference"]), 2) if processing_times["reference"] else 0,
@@ -227,10 +250,34 @@ average_r_ves = sum(r_ves_scores) / len(r_ves_scores) if r_ves_scores else 0
 
 # Display results as DataFrame
 df = pd.DataFrame({
-    "Metric": ["Similarity Score", "BLEU Score", "Processing Time (Reference)", "Processing Time (Generated)"],
-    "Average": [similarity_stats["average"], bleu_stats["average"], str(f"{processing_time_ref_stats["average"]}s"), str(f"{processing_time_gen_stats["average"]}s")],
-    "Min": [similarity_stats["min"], bleu_stats["min"], str(f"{processing_time_ref_stats["min"]}s"), str(f"{processing_time_gen_stats["min"]}s")],
-    "Max": [similarity_stats["max"], bleu_stats["max"], str(f"{processing_time_ref_stats["max"]}s"), str(f"{processing_time_gen_stats["max"]}s")],
+    "Metric": [
+        "SQL Query Similarity Score", 
+        "Output Dataset Jaccard Similarity",  
+        "BLEU Score", 
+        "Processing Time (Reference)", 
+        "Processing Time (Generated)"
+    ],
+    "Average": [
+        similarity_stats["average"], 
+        jaccard_stats["average"],  
+        bleu_stats["average"], 
+        str(f"{processing_time_ref_stats['average']}s"), 
+        str(f"{processing_time_gen_stats['average']}s")
+    ],
+    "Min": [
+        similarity_stats["min"], 
+        jaccard_stats["min"],  
+        bleu_stats["min"], 
+        str(f"{processing_time_ref_stats['min']}s"), 
+        str(f"{processing_time_gen_stats['min']}s")
+    ],
+    "Max": [
+        similarity_stats["max"], 
+        jaccard_stats["max"], 
+        bleu_stats["max"], 
+        str(f"{processing_time_ref_stats['max']}s"), 
+        str(f"{processing_time_gen_stats['max']}s")
+    ],
 })
 
 # Summarize error messages
@@ -252,7 +299,7 @@ print(f"Exact Match Accuracy: {exact_match_accuracy:.2%}")
 print(f"Execution Accuracy: {execution_accuracy:.2%}")
 
 print(f"Average R-VES Score: {average_r_ves:.2f}")
-# Display performance metrics in console
+
 print("\nSummary of BLEU Scores and Processing Times:")
 print(df)
 
@@ -263,7 +310,8 @@ for error, count in generated_error_summary.most_common(5):
 # Save results to a JSON file
 output_results = {
     "exact_match_accuracy": exact_match_accuracy,
-    "average_similarity_score": average_similarity_score,
+    "average_sql_similarity_score": average_similarity_score,
+    "average_output_jaccard_similarity_score": average_jaccard,
     "average_bleu_score": average_bleu_score,
     "execution_accuracy": execution_accuracy,
     "average_r-ves_score": average_r_ves,
@@ -285,6 +333,7 @@ print(f"Performance results saved to {output_file_path}")
 
 # Generate charts
 plot_similarity_distribution(similarity_scores)
+plot_jaccard_similarity_distribution(jaccard_scores)
 plot_bleu_distribution(bleu_scores)
 plot_processing_time_comparison(processing_time_ref_stats, processing_time_gen_stats)
 plot_queries_validation_breakdown(valid_generated_queries_count, invalid_generated_queries_count, non_sql_responses_count)
