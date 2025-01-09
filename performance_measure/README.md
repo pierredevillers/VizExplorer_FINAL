@@ -80,4 +80,4 @@
 ### Queries Validation Breakdown
 ![Queries Validation Breakdown](graphical_charts/Queries_validation_breakdown.png)
 
-```markdown
+---
