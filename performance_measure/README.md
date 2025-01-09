@@ -8,7 +8,7 @@
   - **Non-Valid Reference Queries**: 3 (0.71% of 422 valid queries)
   - **Valid Generated Queries**: 222 (52.61% of 422 valid queries)
   - **Non-Valid Generated Queries**: 199 (47.16% of 422 valid queries)
-  - **Non-SQL Responses (Out of Scope)**: 110 (20.68% of 532 total queries)
+- **Non-SQL Responses (Out of Scope)**: 110 (20.68% of 532 total queries)
 
 - **Exact Match Accuracy**: 0.00%
 - **Execution Accuracy**: 25.36%
