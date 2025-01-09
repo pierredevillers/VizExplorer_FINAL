@@ -121,7 +121,7 @@ For more details on the BIRD dataset and benchmarked techniques, visit [BIRD Ben
 - **Processing Times**:
   - **Reference Query**: Average 0.01s (Max: 0.2s, Min: 0.0s)
   - **Generated Query**: Average 0.01s (Max: 0.14s, Min: 0.0s)
-  - **Average R-VES Score**: 0.85
+  - **Average R-VES Score**: 0.24
 ---
 ## **Data and Models**
 
