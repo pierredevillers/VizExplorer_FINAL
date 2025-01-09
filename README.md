@@ -97,12 +97,6 @@ The **R-VES** evaluates query correctness and efficiency by comparing the execut
 
 ![R-VES Score Calculation](R-VES_score_calculation.png)
 
-Where:
-- **`τ` (tau)** is the **time ratio**:
-  \[
-  \tau = \frac{\text{Execution Time of Reference Query}}{\text{Execution Time of Predicted Query}}
-  \]
-
 - R-VES rewards:
   - Both query correctness and efficiency (queries executed faster than the reference query receive higher scores).
 ---
