@@ -59,7 +59,7 @@ Link to the application: https://vizexplorer-tool.streamlit.app/
 **Model Results on BIRD Benchmark:**
 - **Exact Match Accuracy**: 0.00%
 - **Execution Accuracy**: 25.36%
-- **Average R-VES Score**: 0.85
+- **Average R-VES Score**: 0.24
 
 **Comparison with Other Benchmarked Techniques**:
 
