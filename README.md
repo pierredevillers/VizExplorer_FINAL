@@ -87,9 +87,7 @@ Link to the application: https://vizexplorer-tool.streamlit.app/
 #### **1. Execution Accuracy (EX)**
 The **Execution Accuracy (EX)** measures the percentage of queries for which the results of the **predicted SQL query** match the results of the **reference SQL query**. The formula is as follows:
 
-\[
-\text{Execution Accuracy (EX)} = \frac{\text{Number of Correctly Executed Queries}}{\text{Total Number of Valid Queries}}
-\]
+**Execution Accuracy (EX) = (Number of Correctly Executed Queries) / (Total Number of Valid Queries)**
 
 - **Correctly Executed Query**: A query whose results (rows and columns) exactly match those of the reference query.
 - **Valid Query**: A query that executes without syntax or logical errors.
@@ -97,17 +95,7 @@ The **Execution Accuracy (EX)** measures the percentage of queries for which the
 #### **2. Reward-Based Valid Efficiency Score (R-VES)**
 The **R-VES** evaluates query correctness and efficiency by comparing the execution time of the predicted query against the reference query. The formula is as follows:
 
-\[
-\text{R-VES} =
-\begin{cases} 
-1.25 & \text{if query is correct and } \tau \geq 2 \\
-1.00 & \text{if query is correct and } 1 \leq \tau < 2 \\
-0.75 & \text{if query is correct and } 0.5 \leq \tau < 1 \\
-0.50 & \text{if query is correct and } 0.25 \leq \tau < 0.5 \\
-0.25 & \text{if query is correct and } \tau < 0.25 \\
-0.00 & \text{if query is incorrect}
-\end{cases}
-\]
+![R-VES Score Calculation](R-VES_score_calculation.png)
 
 Where:
 - **`τ` (tau)** is the **time ratio**:
