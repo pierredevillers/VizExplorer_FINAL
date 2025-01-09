@@ -15,7 +15,7 @@
 - **Average R-VES Score**: 0.24
 ---
 
-### BLEU Scores and Processing Times
+### Similarity Scores and Processing Times
 
 | Metric                      | Average | Min   | Max   |
 |-----------------------------|---------|-------|-------|
