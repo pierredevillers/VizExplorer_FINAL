@@ -117,12 +117,11 @@ For more details on the BIRD dataset and benchmarked techniques, visit [BIRD Ben
   - **Execution Accuracy**: 25.36% (8)
   - **Average BLEU Score**: 0.07
   - **Average Similarity Score**: 0.58
-  - **Average R-VES Score**: 0.85
 
 - **Processing Times**:
   - **Reference Query**: Average 0.01s (Max: 0.2s, Min: 0.0s)
   - **Generated Query**: Average 0.01s (Max: 0.14s, Min: 0.0s)
-
+  - **Average R-VES Score**: 0.85
 ---
 ## **Data and Models**
 
