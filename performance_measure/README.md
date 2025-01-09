@@ -21,6 +21,7 @@
 |-----------------------------|---------|-------|-------|
 | **Similarity Score**        | 0.58    | 0.0   | 0.97  |
 | **BLEU Score**              | 0.07    | 0.0   | 0.72  |
+| **Jaccard Similarity Score**              | 0.41    | 0.0   | 1.0  |
 | **Processing Time (Reference)** | 0.01s   | 0.0s  | 0.2s  |
 | **Processing Time (Generated)** | 0.01s   | 0.0s  | 0.14s |
 
@@ -73,6 +74,9 @@
 
 ### BLEU Score Distribution
 ![BLEU Score Distribution](graphical_charts/BLEU_score_distribution.png)
+
+### Jaccard Similarity Score Distribution
+![Jaccard Similarity Score Distribution](graphical_charts/Jaccard_similarity_score_distribution.png)
 
 ### Processing Time Comparison
 ![Processing Time Comparison](graphical_charts/Processing_time_comparison.png)
