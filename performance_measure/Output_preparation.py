@@ -1,5 +1,5 @@
 import json
-import sqlparse  # To normalize SQL queries for consistent formatting
+import sqlparse 
 
 # File paths
 reference_file_path = 'data/BIRD_dataset/raw_data/converted_ground_truth.json'

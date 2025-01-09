@@ -5,13 +5,7 @@ INPUT_FILE = "VizExplorer_FINAL/model_training_and_perf/bird_model_output.json"
 OUTPUT_FILE = "VizExplorer_FINAL/model_training_and_perf/bird_model_output_formatted.json"
 
 def reformat_bird_output(input_file, output_file):
-    """
-    Reformat the bird_model_output.json file to match the BIRD evaluation format.
 
-    Args:
-        input_file (str): Path to the input JSON file.
-        output_file (str): Path to save the reformatted JSON file.
-    """
     try:
         # Read the original bird_model_output.json file
         with open(input_file, 'r', encoding='utf-8') as f:
@@ -42,6 +36,5 @@ def reformat_bird_output(input_file, output_file):
     except Exception as e:
         print(f"Error during reformatting: {e}")
 
-# Run the reformatting process
 if __name__ == "__main__":
     reformat_bird_output(INPUT_FILE, OUTPUT_FILE)
