@@ -69,15 +69,15 @@
 ## Visualizations
 
 ### BLEU Score Distribution
-![BLEU Score Distribution](performance_measure/graphical_charts/BLEU_score_distribution.png)
+![BLEU Score Distribution](graphical_charts/BLEU_score_distribution.png)
 
 ### Processing Time Comparison
-![Processing Time Comparison](performance_measure/graphical_charts/Processing_time_comparison.png)
+![Processing Time Comparison](graphical_charts/Processing_time_comparison.png)
 
 ### Queries Validation Breakdown
-![Queries Validation Breakdown](performance_measure/graphical_charts/Queries_validation_breakdown.png)
+![Queries Validation Breakdown](graphical_charts/Queries_validation_breakdown.png)
 
 ### Similarity Score Distribution
-![Similarity Score Distribution](performance_measure/graphical_charts/Similarity_score_distribution.png)
+![Similarity Score Distribution](graphical_charts/Similarity_score_distribution.png)
 
 ```markdown
