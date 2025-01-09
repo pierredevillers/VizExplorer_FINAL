@@ -76,13 +76,48 @@ Link to the application: https://vizexplorer-tool.streamlit.app/
 | 4    | GPT-4-turbo            | UNK  | 36.00      |
 | 5    | Llama3-70b-instruct    | UNK  | 29.40      |
 | 6    | GPT-35-turbo           | UNK  | 27.40      |
-| **7** | **VizExplorer** | -    | **25.36**  |
-| 8    | GPT-35-turbo-instruct  | UNK  | 26.60      |
+| 7    | GPT-35-turbo-instruct  | UNK  | 26.60      |
+| **8** | **VizExplorer** | -    | **25.36**  |
 | 9    | Phi-3-medium-128k-instruct | UNK  | 21.60      |
 | 10    | Llama3-8b-instruct     | UNK  | 18.40      |
 | 11   | Mixtral-8x7b           | UNK  | 12.40      |
 
+### Methods of Calculation
 
+#### **1. Execution Accuracy (EX)**
+The **Execution Accuracy (EX)** measures the percentage of queries for which the results of the **predicted SQL query** match the results of the **reference SQL query**. The formula is as follows:
+
+\[
+\text{Execution Accuracy (EX)} = \frac{\text{Number of Correctly Executed Queries}}{\text{Total Number of Valid Queries}}
+\]
+
+- **Correctly Executed Query**: A query whose results (rows and columns) exactly match those of the reference query.
+- **Valid Query**: A query that executes without syntax or logical errors.
+
+#### **2. Reward-Based Valid Efficiency Score (R-VES)**
+The **R-VES** evaluates query correctness and efficiency by comparing the execution time of the predicted query against the reference query. The formula is as follows:
+
+\[
+\text{R-VES} =
+\begin{cases} 
+1.25 & \text{if query is correct and } \tau \geq 2 \\
+1.00 & \text{if query is correct and } 1 \leq \tau < 2 \\
+0.75 & \text{if query is correct and } 0.5 \leq \tau < 1 \\
+0.50 & \text{if query is correct and } 0.25 \leq \tau < 0.5 \\
+0.25 & \text{if query is correct and } \tau < 0.25 \\
+0.00 & \text{if query is incorrect}
+\end{cases}
+\]
+
+Where:
+- **`τ` (tau)** is the **time ratio**:
+  \[
+  \tau = \frac{\text{Execution Time of Reference Query}}{\text{Execution Time of Predicted Query}}
+  \]
+
+- R-VES rewards:
+  - Both query correctness and efficiency (queries executed faster than the reference query receive higher scores).
+---
 For more details on the BIRD dataset and benchmarked techniques, visit [BIRD Bench](https://bird-bench.github.io/).
 
 ---
