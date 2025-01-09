@@ -20,8 +20,6 @@ A **Visual Natural Language Interface (V-NLI)** application designed for intuiti
 
 VizExplorer is a **V-NLI application** that enables users to query financial datasets in plain language, automatically translating their input into SQL, executing the query, and visualizing results. The system is optimized for financial analysis tasks and supports database schema generation, and output visualizations.
 
----
-
 Link to the application: https://vizexplorer-tool.streamlit.app/
 
 ---
@@ -33,7 +31,7 @@ Link to the application: https://vizexplorer-tool.streamlit.app/
 - **Performance Metrics**: Logs and evaluates model outputs trained on the **BIRD** dataset with accuracy.
 - **Database Management**: Prepares, validates, and executes queries on PostgreSQL and SQLite.
 
-### Folder Structure
+## **Folder Structure**
 
 - **`data/`**:
   - Contains datasets for training, testing, and real-world financial data:
@@ -57,7 +55,7 @@ Link to the application: https://vizexplorer-tool.streamlit.app/
     - `bird_model_output.json`: Raw model predictions.
 
 ---
-### BIRD Benchmark Results
+## **BIRD Benchmark Results**
 
 **Model Results on BIRD Benchmark:**
 - **Exact Match Accuracy**: 0.00%
@@ -95,7 +93,7 @@ The **Execution Accuracy (EX)** measures the percentage of queries for which the
 #### **2. Reward-Based Valid Efficiency Score (R-VES)**
 The **R-VES** evaluates query correctness and efficiency by comparing the execution time of the predicted query against the reference query. The formula is as follows:
 
-![R-VES Score Calculation](R-VES_score_calculation.png)
+![R-VES Score Calculation](resources/R-VES_score_calculation.png)
 
 - R-VES rewards:
   - Both query correctness and efficiency (queries executed faster than the reference query receive higher scores).
@@ -134,8 +132,44 @@ For more details on the BIRD dataset and benchmarked techniques, visit [BIRD Ben
   5. `relation "public.transactions_1k" does not exist`: 3 occurrences
 
 ---
+## Data and Models
 
-### **Logs and Visualizations**
+- **Clients Table**:
+  - Contains client details such as name, nationality, email, and date of birth.
+  - **Source**: This table is **generated** using the `Faker` library with Swiss locales for realistic data.
+  - Script: [`clients_data.py`](clients_data.py)
+
+- **Accounts Table**:
+  - Stores details of financial accounts, including balances, types (savings, brokerage, etc.), and currencies.
+  - **Source**: This table is **generated** using synthetic data linked to the `Clients Table`.
+  - Script: [`accounts_data.py`](accounts_data.py)
+
+- **Transactions Table**:
+  - Records client transactions (deposits, withdrawals, stock buys/sells), with details such as amounts, currencies, and stock tickers.
+  - **Source**: This table is **generated** with predefined transaction patterns linked to the `Accounts Table`.
+  - Script: [`transactions_data.py`](transactions_data.py)
+
+- **Portfolios Table**:
+  - Maintains portfolios linked to clients, with portfolio names, types (e.g., Balanced Growth, High-Yield Income), total value, and currency.
+  - **Source**: This table is **generated** based on client data from the `Clients Table`.
+  - Script: [`portfolios_data.py`](portfolios_data.py)
+
+- **Holdings Table**:
+  - Tracks securities (stocks, ETFs) held within client portfolios, with details such as quantity, purchase price, and current value.
+  - **Source**: This table is **generated**, linking portfolios from the `Portfolios Table` and securities from the `Stocks and ETFs`.
+  - Script: [`holdings_data.py`](holdings_data.py)
+
+- **Stocks**:
+  - Historical price data for stocks such as AAPL, MSFT, and TSLA.
+  - **Source**: The data is fetched using the **StockData.org API**.
+  - Script: [`stocks_data.py`](stocks_data.py)
+
+- **ETFs**:
+  - Historical price data for ETFs such as SPDR S&P 500 (SPY) and Vanguard Total Stock Market ETF (VTI).
+  - **Source**: The data is fetched using the **Financial Modeling Prep API**.
+  - Script: [`etf_data.py`](etf_data.py)
+
+## **Logs and Visualizations**
 - **Logs**:
   - Location: `logs/`
   - Files: `evaluation_log.log`, `training_log.log`
