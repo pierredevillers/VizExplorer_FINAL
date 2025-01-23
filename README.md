@@ -10,7 +10,7 @@ A **Visual Natural Language Interface (V-NLI)** application designed for intuiti
 2. [Features](#features)
 3. [Folder Structure](#folder-structure)
 4. [BIRD Benchmark Results](#bird-benchmark-results)
-5. [Additiona Measures](#additional-measures)
+5. [Additional Measures](#additional-measures)
 6. [Data and Models](#data-and-models)
 
 ---
