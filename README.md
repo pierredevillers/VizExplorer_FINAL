@@ -112,6 +112,37 @@ For more details on the BIRD dataset and benchmarked techniques, visit [BIRD Ben
   - **Non-Valid Generated Queries**: 199 (47.16% of 422 valid queries)
   - **Non-SQL Responses (Out of Scope)**: 110 (20.68% of 532 total queries)
 
+### **SQL Output Precision, Recall, and F1 Score**
+The SQL output performance metrics evaluate how accurately the model-generated outputs match the reference SQL query results. These metrics measure row-level matching, identifying true positives, false positives, and false negatives.
+
+**Quick Overview:**
+- **True Positive Rows:** 44,887  
+  Correctly generated rows matching the reference output.
+  
+- **False Positive Rows:** 5,837  
+  Rows incorrectly included by the generated query but not present in the reference output.
+  
+- **False Negative Rows:** 266,759  
+  Rows present in the reference output but missing from the generated query.
+
+- **Empty Reference Queries:** 0  
+  Cases where the reference query produced no output.
+
+- **Empty Generated Queries:** 1  
+  Cases where the model failed to produce an output.
+
+### **Precision, Recall, and F1-Score**
+| Metric     | Value  |
+|------------|--------|
+| **Precision** | 0.88   |
+| **Recall**    | 0.14   |
+| **F1-Score**  | 0.25   |
+
+**Interpretation:**  
+- **Precision (88%)** indicates that most rows returned by the generated query are relevant and correct.
+- **Recall (14%)** shows that the model struggles to retrieve a significant portion of the rows present in the reference output, which is likely a result of errors in query structure or logic.
+- **F1-Score (25%)** highlights the imbalance between precision and recall, with room for improvement in recall to achieve a more comprehensive retrieval of correct rows.
+
 - **Metrics**:
   - **Exact Match Accuracy**: 0.00%
   - **Execution Accuracy**: 25.36% 
