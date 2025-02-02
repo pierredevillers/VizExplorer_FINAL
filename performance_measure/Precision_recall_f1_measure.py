@@ -1,7 +1,6 @@
 import json
 import psycopg2
 
-# Database credentials
 db_credentials = {
     "user": "postgres",
     "password": "123456789",
@@ -9,12 +8,10 @@ db_credentials = {
     "port": "5432"
 }
 
-# Load the cleaned JSON file
 input_file_path = "performance_measure/cleaned_sql_queries.json"
 with open(input_file_path, 'r') as infile:
     queries = json.load(infile)
 
-# Function to connect to the database
 def connect_to_db(db_id):
     try:
         conn = psycopg2.connect(dbname=db_id, **db_credentials)
@@ -23,7 +20,6 @@ def connect_to_db(db_id):
         print(f"Error connecting to database {db_id}: {e}")
         return None
 
-# Function to execute a query and fetch results
 def execute_query(conn, sql):
     try:
         with conn.cursor() as cur:
@@ -33,7 +29,6 @@ def execute_query(conn, sql):
     except Exception as e:
         return f"Query execution error: {e}"
 
-# Initialize variables for precision, recall, and F1-score calculation
 true_positives = 0
 false_positives = 0
 false_negatives = 0
@@ -41,21 +36,17 @@ false_negatives = 0
 total_queries = len(queries)
 processed_queries = 0
 
-# Evaluate each query
 for query in queries:
     ref_query = query["reference_sql_query"]["normalized"].strip()
     gen_query = query["generated_sql_query"]["normalized"].strip()
     db_id = query["db_id"]
 
-    # Count cases where queries are empty
     if not ref_query and not gen_query:
         continue
 
     try:
-        # Connect to the database
         conn = connect_to_db(db_id)
         if conn:
-            # Execute both queries
             ref_result = execute_query(conn, ref_query)
             gen_result = execute_query(conn, gen_query)
             
@@ -63,12 +54,10 @@ for query in queries:
                 ref_set = set(tuple(row) for row in ref_result)
                 gen_set = set(tuple(row) for row in gen_result)
 
-                # Calculate TP, FP, and FN
                 tp = len(ref_set.intersection(gen_set))
                 fp = len(gen_set - ref_set)
                 fn = len(ref_set - gen_set)
 
-                # Update overall counts
                 true_positives += tp
                 false_positives += fp
                 false_negatives += fn
@@ -94,7 +83,6 @@ print(f"Precision: {precision:.2f}")
 print(f"Recall: {recall:.2f}")
 print(f"F1 Score: {f1_score:.2f}")
 
-# Save the performance metrics
 output_results = {
     "true_positives": true_positives,
     "false_positives": false_positives,
