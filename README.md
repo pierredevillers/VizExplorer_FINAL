@@ -104,13 +104,19 @@ For more details on the BIRD dataset and benchmarked techniques, visit [BIRD Ben
 ## **Additional measures**
 
 ### **Quick Overview of Results**
-- **Total Queries**: 532
-- **Valid Queries**: 422
-  - **Valid Reference Queries**: 418 (99.05% of 422 valid queries)
-  - **Non-Valid Reference Queries**: 3 (0.71% of 422 valid queries)
-  - **Valid Generated Queries**: 222 (52.61% of 422 valid queries)
-  - **Non-Valid Generated Queries**: 199 (47.16% of 422 valid queries)
-  - **Non-SQL Responses (Out of Scope)**: 110 (20.68% of 532 total queries)
+- **Total Queries:** 532
+
+- **Valid Queries:** 422
+
+  - **Valid Reference Queries:** 418 (99.05% of 422 valid queries)
+
+  - **Non-Valid Reference Queries:** 3 (0.71% of 422 valid queries)
+
+  - **Valid Generated Queries:** 222 (52.61% of 422 valid queries)
+
+  - **Non-Valid Generated Queries:** 199 (47.16% of 422 valid queries)
+  
+  - **Non-SQL Responses (Out of Scope):** 110 (20.68% of 532 total queries)
 
 ### **SQL Output Precision, Recall, and F1 Score**
 The SQL output performance metrics evaluate how accurately the model-generated outputs match the reference SQL query results. These metrics measure row-level matching, identifying true positives, false positives, and false negatives.
