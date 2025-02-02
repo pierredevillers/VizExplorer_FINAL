@@ -37,8 +37,6 @@ def execute_query(conn, sql):
 true_positives = 0
 false_positives = 0
 false_negatives = 0
-empty_reference_queries = 0
-empty_generated_queries = 0
 
 total_queries = len(queries)
 processed_queries = 0
@@ -51,13 +49,6 @@ for query in queries:
 
     # Count cases where queries are empty
     if not ref_query and not gen_query:
-        continue
-    elif not ref_query:
-        empty_reference_queries += 1
-        continue
-    elif not gen_query:
-        empty_generated_queries += 1
-        false_negatives += 1  # No output from generated query while reference has data
         continue
 
     try:
@@ -99,8 +90,6 @@ print("SQL Output-Based Performance Metrics:")
 print(f"Total True Positive Rows: {true_positives}")
 print(f"Total False Positive Rows: {false_positives}")
 print(f"Total False Negative Rows: {false_negatives}")
-print(f"Total Empty Reference Queries: {empty_reference_queries}")
-print(f"Total Empty Generated Queries: {empty_generated_queries}")
 print(f"Precision: {precision:.2f}")
 print(f"Recall: {recall:.2f}")
 print(f"F1 Score: {f1_score:.2f}")
@@ -110,8 +99,6 @@ output_results = {
     "true_positives": true_positives,
     "false_positives": false_positives,
     "false_negatives": false_negatives,
-    "empty_reference_queries": empty_reference_queries,
-    "empty_generated_queries": empty_generated_queries,
     "precision": round(precision, 2),
     "recall": round(recall, 2),
     "f1_score": round(f1_score, 2),
