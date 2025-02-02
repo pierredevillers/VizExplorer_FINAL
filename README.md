@@ -157,37 +157,37 @@ The SQL output performance metrics evaluate how accurately the model-generated o
 - **Clients Table**:
   - Contains client details such as name, nationality, email, and date of birth.
   - **Source**: This table is **generated** using the `Faker` library with Swiss locales for realistic data.
-  - Script: [`clients_data.py`]((https://github.com/pierredevillers/VizExplorer_FINAL/blob/main/data/actual_data/creation_scripts/clients_data.py))
+  - Script: [`clients_data.py`](https://github.com/pierredevillers/VizExplorer_FINAL/blob/main/data/actual_data/creation_scripts/clients_data.py)
 
 - **Accounts Table**:
   - Stores details of financial accounts, including balances, types (savings, brokerage, etc.), and currencies.
   - **Source**: This table is **generated** using synthetic data linked to the `Clients Table`.
-  - Script: [`accounts_data.py`]((https://github.com/pierredevillers/VizExplorer_FINAL/blob/main/data/actual_data/creation_scripts/accounts_data.py))
+  - Script: [`accounts_data.py`](https://github.com/pierredevillers/VizExplorer_FINAL/blob/main/data/actual_data/creation_scripts/accounts_data.py)
 
 - **Transactions Table**:
   - Records client transactions (deposits, withdrawals, stock buys/sells), with details such as amounts, currencies, and stock tickers.
   - **Source**: This table is **generated** with predefined transaction patterns linked to the `Accounts Table`.
-  - Script: [`transactions_data.py`]((https://github.com/pierredevillers/VizExplorer_FINAL/blob/main/data/actual_data/creation_scripts/transactions_data.py))
+  - Script: [`transactions_data.py`](https://github.com/pierredevillers/VizExplorer_FINAL/blob/main/data/actual_data/creation_scripts/transactions_data.py)
 
 - **Portfolios Table**:
   - Maintains portfolios linked to clients, with portfolio names, types (e.g., Balanced Growth, High-Yield Income), total value, and currency.
   - **Source**: This table is **generated** based on client data from the `Clients Table`.
-  - Script: [`portfolios_data.py`]((https://github.com/pierredevillers/VizExplorer_FINAL/blob/main/data/actual_data/creation_scripts/portfolios_data.py))
+  - Script: [`portfolios_data.py`](https://github.com/pierredevillers/VizExplorer_FINAL/blob/main/data/actual_data/creation_scripts/portfolios_data.py)
 
 - **Holdings Table**:
   - Tracks securities (stocks, ETFs) held within client portfolios, with details such as quantity, purchase price, and current value.
   - **Source**: This table is **generated**, linking portfolios from the `Portfolios Table` and securities from the `Stocks and ETFs`.
-  - Script: [`holdings_data.py`]((https://github.com/pierredevillers/VizExplorer_FINAL/blob/main/data/actual_data/creation_scripts/holdings_data.py))
+  - Script: [`holdings_data.py`](https://github.com/pierredevillers/VizExplorer_FINAL/blob/main/data/actual_data/creation_scripts/holdings_data.py)
 
 - **Stocks**:
   - Historical price data for stocks such as AAPL, MSFT, and TSLA.
   - **Source**: The data is fetched using the **StockData.org API**.
-  - Script: [`stocks_data.py`]((https://github.com/pierredevillers/VizExplorer_FINAL/blob/main/data/actual_data/creation_scripts/stocks_data.py))
+  - Script: [`stocks_data.py`](https://github.com/pierredevillers/VizExplorer_FINAL/blob/main/data/actual_data/creation_scripts/stocks_data.py)
 
 - **ETFs**:
   - Historical price data for ETFs such as SPDR S&P 500 (SPY) and Vanguard Total Stock Market ETF (VTI).
   - **Source**: The data is fetched using the **Financial Modeling Prep API**.
-  - Script: [`etf_data.py`]((https://github.com/pierredevillers/VizExplorer_FINAL/blob/main/data/actual_data/creation_scripts/etf_data.py))
+  - Script: [`etf_data.py`](https://github.com/pierredevillers/VizExplorer_FINAL/blob/main/data/actual_data/creation_scripts/etf_data.py)
 
 ![Relational Database Schema](data/actual_data/database_schema.png)
 
