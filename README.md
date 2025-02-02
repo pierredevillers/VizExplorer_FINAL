@@ -121,20 +121,17 @@ For more details on the BIRD dataset and benchmarked techniques, visit [BIRD Ben
 ### **SQL Output Precision, Recall, and F1 Score**
 The SQL output performance metrics evaluate how accurately the model-generated outputs match the reference SQL query results. These metrics measure row-level matching, identifying true positives, false positives, and false negatives.
 
+**Detailed Metrics:**
 - **True Positive Rows:** 44,887  
-  Correctly generated rows matching the reference output.
+  Rows correctly retrieved by the generated query and present in the reference result.
   
 - **False Positive Rows:** 5,837  
-  Rows incorrectly included by the generated query but not present in the reference output.
+  Rows incorrectly included by the generated query but absent from the reference result.
   
 - **False Negative Rows:** 266,759  
-  Rows present in the reference output but missing from the generated query.
+  Rows present in the reference result but missing from the generated query.
 
-- **Empty Reference Queries:** 0  
-  Cases where the reference query produced no output.
-
-- **Empty Generated Queries:** 1  
-  Cases where the model failed to produce an output.
+---
 
 ### **Precision, Recall, and F1-Score**
 | Metric     | Value  |
