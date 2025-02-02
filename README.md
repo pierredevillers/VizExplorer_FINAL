@@ -131,8 +131,6 @@ The SQL output performance metrics evaluate how accurately the model-generated o
 - **False Negative Rows:** 266,759  
   Rows present in the reference result but missing from the generated query.
 
----
-
 ### **Precision, Recall, and F1-Score**
 | Metric     | Value  |
 |------------|--------|
@@ -140,11 +138,7 @@ The SQL output performance metrics evaluate how accurately the model-generated o
 | **Recall**    | 0.14   |
 | **F1-Score**  | 0.25   |
 
-**Interpretation:**  
-- **Precision (88%)** indicates that most rows returned by the generated query are relevant and correct.
-- **Recall (14%)** shows that the model struggles to retrieve a significant portion of the rows present in the reference output, which is likely a result of errors in query structure or logic.
-- **F1-Score (25%)** highlights the imbalance between precision and recall, with room for improvement in recall to achieve a more comprehensive retrieval of correct rows.
-
+--- 
 - **Metrics**:
   - **Exact Match Accuracy**: 0.00%
   - **Execution Accuracy**: 25.36% 
